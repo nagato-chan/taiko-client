@@ -93,4 +93,5 @@ var ProverFlags = MergeFlags(CommonFlags, []cli.Flag{
 	RandomDummyProofDelay,
 	OnlyProveOddNumberBlocks,
 	OnlyProveEvenNumberBlocks,
+	ProofNumberRate,
 })
