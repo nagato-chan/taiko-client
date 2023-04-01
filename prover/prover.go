@@ -288,6 +288,11 @@ func (p *Prover) onBlockProposed(
 		log.Info("Skip a block with even number", "id", event.Id)
 		return nil
 	}
+	// ignore 0 rate
+	if p.cfg.ProofNumberRate != 0 && event.Id.Uint64()%p.cfg.ProofNumberRate != 0 {
+		log.Info("Skip a block with proof number rate:", p.cfg.ProofNumberRate, "id", event.Id)
+		return nil
+	}
 
 	log.Info("Proposed block", "blockID", event.Id)
 	metrics.ProverReceivedProposedBlockGauge.Update(event.Id.Int64())

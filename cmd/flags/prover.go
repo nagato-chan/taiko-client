@@ -65,6 +65,12 @@ var (
 		Value:    false,
 		Category: proverCategory,
 	}
+	ProofNumberRate = &cli.Uint64Flag{
+		Name:     "proofNumberRate",
+		Usage:    "The rate of proof number to verify",
+		Value:  0,
+		Category: proverCategory,
+	}
 	ProofSubmittorPrivKey = &cli.StringFlag{
 		Name:     "proofSubmittorPrivKey",
 		Usage:    "Private key of L1 proof submittor",
