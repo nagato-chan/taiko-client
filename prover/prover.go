@@ -290,7 +290,7 @@ func (p *Prover) onBlockProposed(
 	}
 	// ignore 0 rate
 	if p.cfg.ProofNumberRate != 0 && event.Id.Uint64()%p.cfg.ProofNumberRate != 0 {
-		log.Info("Skip a block with proof number rate:", p.cfg.ProofNumberRate, "id", event.Id)
+		// log.Info("Skip a block with proof number rate:", p.cfg.ProofNumberRate, "id", event.Id)
 		return nil
 	}
 
