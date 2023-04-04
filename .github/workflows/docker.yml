@@ -1,4 +1,4 @@
-name: "Push docker image to GCR"
+name: 'Push docker image to GHCR'
 
 on:
   push:
@@ -8,6 +8,9 @@ jobs:
   push-docker-image:
     name: Build and push docker image
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: Checkout
