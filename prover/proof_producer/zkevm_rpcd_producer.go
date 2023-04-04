@@ -165,7 +165,7 @@ func (d *ZkevmRpcdProducer) callProverDaemon(ctx context.Context, opts *ProofReq
 		degree = output.Circuit.Degree
 		log.Info("Proof generated", "height", opts.Height, "degree", degree, "time", time.Since(start))
 		return nil
-	}, backoff.NewConstantBackOff(10*time.Second)); err != nil {
+	}, backoff.NewConstantBackOff(9*time.Second)); err != nil {
 		return nil, 0, err
 	}
 	return proof, degree, nil
