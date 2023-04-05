@@ -33,6 +33,7 @@ type Config struct {
 	OnlyProveOddNumberBlocks        bool
 	OnlyProveEvenNumberBlocks       bool
 	ProofNumberRate                 uint64
+	ProofNumberOffset               uint64
 }
 
 // NewConfigFromCliContext creates a new config instance from command line flags.

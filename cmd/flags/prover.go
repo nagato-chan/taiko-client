@@ -71,6 +71,12 @@ var (
 		Value:  0,
 		Category: proverCategory,
 	}
+	ProofNumberOffset = &cli.Uint64Flag{
+		Name:     "proofNumberOffset",
+		Usage:    "The offset of proof number to verify",
+		Value:  0,
+		Category: proverCategory,
+	}
 	ProofSubmittorPrivKey = &cli.StringFlag{
 		Name:     "proofSubmittorPrivKey",
 		Usage:    "Private key of L1 proof submittor",
@@ -94,4 +100,5 @@ var ProverFlags = MergeFlags(CommonFlags, []cli.Flag{
 	OnlyProveOddNumberBlocks,
 	OnlyProveEvenNumberBlocks,
 	ProofNumberRate,
+	ProofNumberOffset,
 })
