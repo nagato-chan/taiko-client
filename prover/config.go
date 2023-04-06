@@ -108,6 +108,6 @@ func NewConfigFromCliContext(c *cli.Context) (*Config, error) {
 		OnlyProveOddNumberBlocks:        c.Bool(flags.OnlyProveOddNumberBlocks.Name),
 		OnlyProveEvenNumberBlocks:       c.Bool(flags.OnlyProveEvenNumberBlocks.Name),
 		ProofNumberRate:                 c.Uint64(flags.ProofNumberRate.Name),
-		ProofNumerOffset:  c.Uint64(flags.ProofNumberOffset)
+		ProofNumberOffset:  c.Uint64(flags.ProofNumberOffset)
 	}, nil
 }
