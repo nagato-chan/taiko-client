@@ -96,10 +96,12 @@ func (s *ValidProofSubmitter) RequestProof(ctx context.Context, event *bindings.
 func (s *ValidProofSubmitter) SubmitProof(
 	ctx context.Context,
 	proofWithHeader *proofProducer.ProofWithHeader,
+	isOracle bool,
 ) (err error) {
 	log.Info(
 		"New valid block proof",
 		"blockID", proofWithHeader.BlockID,
+		"metaID", proofWithHeader.Meta.Id,
 		"beneficiary", proofWithHeader.Meta.Beneficiary,
 		"hash", proofWithHeader.Header.Hash(),
 		"proof", common.Bytes2Hex(proofWithHeader.ZkProof),
@@ -198,7 +200,7 @@ func (s *ValidProofSubmitter) SubmitProof(
 		return s.rpc.TaikoL1.ProveBlock(txOpts, blockID, input)
 	}
 
-	if err := sendTxWithBackoff(ctx, s.rpc, blockID, sendTx); err != nil {
+	if err := sendTxWithBackoff(ctx, s.rpc, blockID, sendTx, isOracle); err != nil {
 		if errors.Is(err, errUnretryable) {
 			return nil
 		}

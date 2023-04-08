@@ -362,9 +362,21 @@ func (p *Prover) submitProofOp(ctx context.Context, proofWithHeader *proofProduc
 
 		var err error
 		if isValidProof {
-			err = p.validProofSubmitter.SubmitProof(p.ctx, proofWithHeader)
+			// If its the oracle prover, will keep retrying when there are errors.
+			if p.cfg.Dummy {
+				err = backoff.Retry(func() error {
+					if err := p.validProofSubmitter.SubmitProof(p.ctx, proofWithHeader, true); err != nil {
+						log.Info("Retry oracle proving", "error", err)
+						return err
+					}
+
+					return nil
+				}, backoff.NewConstantBackOff(12*time.Second))
+			} else {
+				err = p.validProofSubmitter.SubmitProof(p.ctx, proofWithHeader, false)
+			}
 		} else {
-			err = p.invalidProofSubmitter.SubmitProof(p.ctx, proofWithHeader)
+			err = p.invalidProofSubmitter.SubmitProof(p.ctx, proofWithHeader, false)
 		}
 
 		if err != nil {
